@@ -1,0 +1,110 @@
+<div class="login">
+        <div class="login-container">            
+                <div class="login-form">
+                    <div class="text-centered login-header">
+                        <img src="../../../../assets/images/Rick-And-Morty-Logo.png">
+                    </div>
+                    <div class="login-body" *ngIf="defaultFormBehavior === 'login'; else registerForm">
+                        <form [formGroup]="loginForm" (ngSubmit)="userAuthTask()" autocomplete="nope">
+                            <div class="input-container">
+                                <div class="icon-input">
+                                    <span><fa-icon [icon]="faUser"></fa-icon></span>
+                                    <input formControlName="email" class="login-input" type="email" placeholder="Correo electrónico" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <div class="icon-input">
+                                    <span><fa-icon [icon]="faKey"></fa-icon></span>
+                                    <input formControlName="password" class="login-input" type="password" placeholder="Contraseña" autocomplete="off">
+                                </div>
+                            </div>                           
+                            <div class="input-container">
+                                <button 
+                                [disabled]="loginForm.invalid" 
+                                [ngClass]="{'disabled': loginForm.invalid}"
+                                class="btn block turquoise"
+                                >
+                                    {{ defaultFormBehavior === 'login' ? 'Login' : 'Crear usuario' }}
+                                </button>                            
+                            </div>
+                        </form>
+                        <p class="text-centered">Ó</p>
+                        <div class="input-container">
+                            <button class="btn block bambu" (click)="splitPage()">
+                                {{ defaultFormBehavior !== 'login' ? 'Login' : 'Nuevo usuario' }}
+                            </button>
+                        </div>                       
+                        <div *ngIf="authUserHasError" class="auth-error">
+                            Error en la autenticación (Verifique correo y/o password).
+                        </div>
+                        <div class="auth-error" *ngIf="loginForm?.controls?.['password']?.errors?.['minlength']">
+                            El password debe tener más de 6 caracteres.
+                       </div>
+                       <div class="auth-error" *ngIf="loginForm?.controls?.['email']?.errors?.['required'] && !loginForm?.controls?.['email']?.pristine">
+                            Escribe tu correo electrónico.
+                        </div>                    
+                    </div>
+
+
+
+
+                    
+                    <ng-template #registerForm>
+                        <div class="login-body">
+                            <form [formGroup]="newUserForm" (ngSubmit)="userAuthTask()" autocomplete="nope">
+                                <div class="input-container">
+                                    <div class="icon-input">
+                                        <span><fa-icon [icon]="faUser"></fa-icon></span>
+                                        <input formControlName="email" class="login-input" type="email" placeholder="Correo electrónico" autocomplete="nope">
+                                    </div>
+                                </div>
+                                <div class="input-container">
+                                    <div class="icon-input">
+                                        <span><fa-icon [icon]="faKey"></fa-icon></span>
+                                        <input formControlName="password" class="login-input" type="password" placeholder="Contraseña" autocomplete="nope">
+                                    </div>
+                                </div>
+                                <div class="input-container">
+                                    <div class="icon-input">
+                                        <span><fa-icon [icon]="faKey"></fa-icon></span>
+                                        <input formControlName="confirmPassword" class="login-input" type="password" placeholder="Confirmar contraseña" autocomplete="nope">
+                                    </div>
+                                </div>
+                                <div class="terms">
+                                    <input 
+                                    type="checkbox"
+                                    id="msg"
+                                    formControlName="acceptTerms">
+                                    <label for="msg" class="to-bold">Acepto y he leído términos y condiciones y la Politica de privacidad</label>                                    
+                                </div>
+                                <div class="input-container">
+                                    <button 
+                                    [disabled]="newUserForm.invalid || newUserForm.errors?.['mismatch']"
+                                    [ngClass]="{'disabled': newUserForm.invalid}"
+                                    class="btn block green hover-shadow-green"
+                                    >
+                                    Crear usuario
+                                    </button>
+                                </div>
+                            </form>
+                            <p class="text-centered green">Ó</p>
+                            <div class="input-container">
+                                <button class="btn block bambu" (click)="splitPage()">
+                                    {{ defaultFormBehavior !== 'login' ? 'Login' : 'Nuevo usuario' }}
+                                </button>
+                            </div>                       
+                            <div *ngIf="authUserHasError" class="auth-error">
+                                Error en la autenticación (Verifique correo y/o password).
+                            </div>
+                            <div class="auth-error" *ngIf="newUserForm?.controls?.['password']?.errors?.['minlength']">
+                                El password debe tener más de 6 caracteres.
+                           </div>
+                           <div class="auth-error" *ngIf="newUserForm?.controls?.['email']?.errors?.['required'] && !newUserForm?.controls?.['email']?.pristine">
+                                Escribe tu correo electrónico.
+                            </div>                    
+                        </div>
+                    </ng-template>                     
+                </div>     
+        </div>
+</div>
+<app-spinner [displaySpinner]="isLoading"></app-spinner>

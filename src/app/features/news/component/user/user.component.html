@@ -1,0 +1,12 @@
+<div class="user">
+    <span class="user-email">{{getUserEmail}}</span>
+    <div class="user-icon">
+        <rk-icon class="rm-icon" [color]="'#fff'" [width]="'45px'"></rk-icon>
+    </div>
+    <div class="user-menu">
+        <ul>
+            <li class="account-user"><span>{{getUserEmail}}</span></li>
+            <li><button class="signOut" (click)="signOut()">Sign Out</button></li>
+        </ul>
+    </div>
+</div>

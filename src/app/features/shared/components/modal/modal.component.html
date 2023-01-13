@@ -1,0 +1,11 @@
+<div *ngIf="canShow" class="modal">    
+    <div class="modal-container">
+        <div class="modal-body">
+            <span class="close" (click)="onCloseModal()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </span>
+            <ng-content select="[title]"></ng-content>
+            <ng-content select="[body]"></ng-content>
+        </div>
+    </div>
+</div>

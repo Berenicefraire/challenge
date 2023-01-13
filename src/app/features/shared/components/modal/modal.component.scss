@@ -1,0 +1,42 @@
+@import '../../../../../assets/scss/parcials/colors';
+
+.modal {
+    display: table;
+    background-color: rgba(#000, .5);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    .modal-container {
+        display: table-cell;
+        vertical-align: middle;
+        .modal-body {
+            .close {
+                position: absolute;
+                top: 0;
+                font-weight: 500;
+                right: 0;
+                cursor: pointer;
+                padding: 1rem;
+                color: $green3;
+                rotate: (180deg);
+                transition: rotate .4s ease 0s;
+                &:hover {
+                    rotate: (90deg);
+                }
+            }
+            @media only screen and (max-width: 600px) {
+                width: 90%;
+            }
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            background-color: $blue1;
+            width: 400px;
+            border-radius: 4px;
+            padding: 1rem;
+            box-shadow: rgba($fusia, 0.25) 0px 54px 55px, rgba($fusia, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+    }
+}

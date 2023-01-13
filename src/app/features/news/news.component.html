@@ -1,0 +1,56 @@
+<div class="char-container">
+    <div class="sidebar" [ngClass]="displayMobileMenu ? 'enter' : ''">
+        <span class="close" (click)="close()"><fa-icon [icon]="faTimes"></fa-icon></span>
+        <img src="../../../assets/images/Rick-And-Morty-Logo.png">
+        <nav>
+            <ul class="navigation">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>                
+        </nav>
+    </div>
+<div class="content">
+    <header>
+        <div class="user-profile">
+            <div class="profile-content">
+                <div (click)="showMenu($event)"><fa-icon class="handler-menu" [icon]="faBars"></fa-icon></div>
+                <div>                    
+                    <app-user></app-user>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="hero">
+        <div class="hero-bg"></div>
+    </div>
+    <div class="char-grid">
+        <ng-container *ngFor="let char of chars">
+            <app-card [content]="char" (onClickArticle)="readArticle($event)"></app-card>
+        </ng-container>
+    </div>
+</div>
+</div>
+<app-spinner [displaySpinner]="isLoading"></app-spinner>
+
+<app-modal 
+*ngIf="articleSelected"
+[canShow]="showModal"
+(onClose)="handlerModal($event)"
+>
+<h3 class="text-centered green" title>{{articleSelected.name}}</h3>
+<div body>
+    <div class="char-details">
+        <div class="char-pic text-centered">
+            <img [src]="articleSelected.image">
+        </div>
+        <ul class="char-profile clean-list">
+            <li>Nombre: <span>{{articleSelected.name}}</span></li>
+            <li>Estatus: <span>{{articleSelected.status}}</span></li>
+            <li>Especie: <span>{{articleSelected.species}}</span></li>
+            <li>Origen: <span>{{articleSelected.origin.name}}</span></li>
+        </ul>        
+    </div>
+</div>
+</app-modal>
