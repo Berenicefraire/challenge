@@ -1,0 +1,54 @@
+$breakpoints: (
+    'xs':       (max-width: 599px),
+    'small':    (min-width: 600px) and (max-width: 959px),
+    'medium':   (min-width: 960px) and (max-width: 1279px),
+    'large':    (min-width: 1280px) and (max-width: 1919px),
+    'xlarge':   (min-width: 1920px)
+    ) !default;
+
+@mixin for-xs {
+  @media (max-width: 599px) { @content; }
+}
+
+@mixin for-small {
+  @media (min-width: 600px) and (max-width: 959px) { @content; }
+}
+
+@mixin for-medium {
+  @media (min-width: 960px) and (max-width: 1279px) { @content; }
+}
+
+@mixin for-large {
+  @media (min-width: 1280px) and (max-width: 1919px) { @content; }
+}
+
+@mixin for-xlarge {
+  @media (min-width: 1920px) { @content; }
+}
+
+/* Breakpoints tomados de Bootstrap */
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+@mixin respond-between($lower, $upper) {
+
+  @if map-has-key($grid-breakpoints, $lower) and map-has-key($grid-breakpoints, $upper) {
+
+    $lower-breakpoint: map-get($grid-breakpoints, $lower);
+    $upper-breakpoint: map-get($grid-breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  
+  } @else {
+    @if (map-has-key($breakpoints, $lower) == false) {
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+  }
+}
